@@ -3,14 +3,14 @@ file  $(LVREMOTE)/data/lvremote_double.template {
   pattern 
     {P, NAME, IND, CONTROL, VI, PORT, READONLY, WRITEONLY, SIMRECORD, DESCRIPTION, SCAN}
     
-    {"\$(P)", "WL", "Wavelength", "", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "Wavelength", "1 second"}
+    {"\$(P)", "WL", "Wavelength", "Wavelength", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "Wavelength", "1 second"}
 }
 
 file  $(LVREMOTE)/data/lvremote_double.template { 
   pattern 
     {P, NAME, IND, CONTROL, VI, PORT, READONLY, WRITEONLY, SIMRECORD, DESCRIPTION, SCAN}
     
-    {"\$(P)", "OPO:CRYS:POS", "OPOCrystalPosition", "", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "OPOCrystalPosition", "1 second"}
+    {"\$(P)", "OPO:CRYS:POS", "OPOCrystalPosition", "OPOCrystalPosition", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "OPOCrystalPosition", "1 second"}
 }
 
 file  $(LVREMOTE)/data/lvremote_double.template { 
