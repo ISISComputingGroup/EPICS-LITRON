@@ -19,7 +19,7 @@ IOCS = [
 ]
 
 
-TEST_MODES = [TestModes.RECSIM]
+TEST_MODES = [TestModes.RECSIM,TestModes.DEVSIM]
 
 
 class LitronTests(unittest.TestCase):
