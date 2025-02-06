@@ -5,10 +5,14 @@ file $(LVREMOTE)/data/lvremote_header.template {
 
 file  $(LVREMOTE)/data/lvremote_double.template { 
   pattern {P, NAME, IND, CONTROL, VI, PORT, READONLY, WRITEONLY, SIMRECORD, DESCRIPTION, SCAN}
-    {"\$(P)", "WL", "Wavelength", "Wavelength", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "Wavelength", "1 second"}    
-    {"\$(P)", "OPO:CRYS:POS", "OPOCrystalPosition", "OPOCrystalPosition", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "OPOCrystalPosition", "1 second"}
-    {"\$(P)", "OPO:CRYS:DIST", "Distance", "Distance", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "Crystal Position", "1 second"}    
-    {"\$(P)", "OPO:CRYS:NUDGE:DIST", "OPONudgeDistance", "OPONudgeDistance", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "","","", "Move Laser", "1 second"}
     {"\$(P)", "OPO:CRYS:NUDGE:UP", "btnNudgeOPOUp", "btnNudgeOPOUp", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "","","", "Move Laser up", "1 second"}    
     {"\$(P)", "OPO:CRYS:NUDGE:DN", "btnNudgeOPODown", "btnNudgeOPODown", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "","","", "Move Laser down", "1 second"}
+}
+
+file  $(LVREMOTE)/data/lvremote_integer.template { 
+  pattern {P, NAME, IND, CONTROL, VI, PORT, READONLY, WRITEONLY, SIMRECORD, DESCRIPTION, SCAN}
+    {"\$(P)", "OPO:CRYS:POS", "OPOCrystalPosition", "OPOCrystalPosition", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "OPOCrystalPosition", "1 second"}  
+    {"\$(P)", "WL", "Wavelength", "Wavelength", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "Wavelength", "1 second"}    
+    {"\$(P)", "OPO:CRYS:DIST", "Distance", "Distance", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "#","","", "Crystal Position", "1 second"}    
+    {"\$(P)", "OPO:CRYS:NUDGE:DIST", "OPONudgeDistance", "OPONudgeDistance", "$(VI_PATH)HIFI Laser - FrontPanel.vi", "\$(NUM_PORT)", "","","", "Move Laser", "1 second"}
 }
