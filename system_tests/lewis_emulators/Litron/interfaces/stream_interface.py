@@ -37,10 +37,10 @@ class LitronStreamInterface(StreamInterface):
     def any_cmd(self, cmd: bytes) -> bytes:
         if cmd == b"":
             return b""
-        elif cmd == b"*IDN? ":
-            if self.device.connected:
+        elif cmd == b"*IDN?" or cmd == b"*IDN? ":  # Trailing space is used by st-common???
+            if self.device.connected and not self.device.initialized:
                 self.device.initialized = True
-            return b""
+            return b"ISIS LabVIEW Remote Interface"
 
         # Device does not respond if it hasn't explicitly been
         # reinitialized (remaking connection on it's own

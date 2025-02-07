@@ -16,7 +16,9 @@ class SimulatedLitron(StateMachineDevice):
         # Whether the hardware is "connected"
         self.connected = True
 
-        # Whether the LVRemote software has been reinitialized since the last disconnection
+        # Whether the LVRemote software has been reinitialized
+        # by sending *IDN? since the last disconnection
+        # (if not, it will not reply)
         self.initialized = True
 
         self.crystal_pos = 5000
