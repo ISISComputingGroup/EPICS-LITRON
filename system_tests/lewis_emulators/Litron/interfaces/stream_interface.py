@@ -8,8 +8,13 @@ from lewis.utils.command_builder import CmdBuilder
 VI_PATH = rb"C:\instrument\dev\ibex_vis\HIFI Laser - FrontPanel.vi"
 
 
-def format_lvremote_float(val: float) -> bytes:
+def format_lvremote_double(val: float) -> bytes:
     reply = struct.pack(">d", val)
+    return len(reply).to_bytes(length=4, byteorder="big", signed=False) + reply
+
+
+def format_lvremote_float(val: float) -> bytes:
+    reply = struct.pack(">f", val)
     return len(reply).to_bytes(length=4, byteorder="big", signed=False) + reply
 
 
@@ -37,7 +42,7 @@ class LitronStreamInterface(StreamInterface):
     def any_cmd(self, cmd: bytes) -> bytes:
         if cmd == b"":
             return b""
-        elif cmd == b"*IDN?" or cmd == b"*IDN? ":  # Trailing space is used by st-common???
+        elif cmd.startswith(b"*IDN?"):
             if self.device.connected and not self.device.initialized:
                 self.device.initialized = True
             return b"ISIS LabVIEW Remote Interface"
@@ -70,13 +75,13 @@ class LitronStreamInterface(StreamInterface):
         match parameter:
             case b"btnNudgeOPOUp" | b"btnNudgeOPODown" | b"Distance":
                 # Never really used by IOC - respond with dummy value
-                return format_lvremote_float(0.0)
+                return format_lvremote_double(0.0)
             case b"OPONudgeDistance":
                 return format_lvremote_int(self._device.nudge_dist)
             case b"OPOCrystalPosition":
                 return format_lvremote_int(self._device.crystal_pos)
             case b"Wavelength":
-                return format_lvremote_int(self._device.wavelength)
+                return format_lvremote_float(self._device.wavelength)
             case _:
                 raise ValueError(f"Unknown LVGET parameter: {parameter}")
 

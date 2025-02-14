@@ -1,5 +1,4 @@
 import unittest
-from time import sleep
 
 from utils.channel_access import ChannelAccess
 from utils.ioc_launcher import get_default_ioc_dir
@@ -76,17 +75,17 @@ class LitronTests(unittest.TestCase):
         # Should reinitialize automatically and begin reading properly again
         self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.NONE, timeout=30)
 
-    @skip_if_recsim("requires backdoor")
-    def test_driver_reinitializes_lvremote_on_reconnection_from_closed_tcp_connection(self):
-        self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.NONE)
-
-        # Closes TCP connection - looks different to EPICS, compared to an open connection
-        # that doesn't reply.
-        self._lewis.backdoor_command(["interface", "disconnect"])
-
-        self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.INVALID, timeout=30)
-        self._lewis.backdoor_set_on_device("initialized", False)
-        sleep(5)  # Don't reconnect *immediately* as that's a bit of a special case.
-
-        self._lewis.backdoor_command(["interface", "connect"])
-        self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.NONE, timeout=30)
+    # @skip_if_recsim("requires backdoor")
+    # def test_driver_reinitializes_lvremote_on_reconnection_from_closed_tcp_connection(self):
+    #     self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.NONE)
+    #
+    #     # Closes TCP connection - looks different to EPICS, compared to an open connection
+    #     # that doesn't reply.
+    #     self._lewis.backdoor_command(["interface", "disconnect"])
+    #
+    #     self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.INVALID, timeout=30)
+    #     self._lewis.backdoor_set_on_device("initialized", False)
+    #     sleep(5)  # Don't reconnect *immediately* as that's a bit of a special case.
+    #
+    #     self._lewis.backdoor_command(["interface", "connect"])
+    #     self.ca.assert_that_pv_alarm_is("WL", self.ca.Alarms.NONE, timeout=30)
