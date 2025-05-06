@@ -1,0 +1,31 @@
+record(compress, "$(P)STALE_CHECK:BUFFER") {
+    field(DESC, "Buffer of previous wavelength values.")
+    field(ALG, "4")
+    field(INP, "$(P)WL CP MS")
+    field(NSAM, "$(BUFFER_SIZE)")
+    field(SCAN, "1 second")
+}
+
+record(compress, "$(P)STALE_CHECK:BUFFER:MAX") {
+    field(DESC, "Max recent wavelength")
+    field(ALG, "1")
+    field(INP, "$(P)STALE_CHECK:BUFFER CP MS")
+    field(NSAM, "1")
+}
+
+
+record(compress, "$(P)STALE_CHECK:BUFFER:MIN") {
+    field(DESC, "Min recent wavelength")
+    field(ALG, "0")
+    field(INP, "$(P)STALE_CHECK:BUFFER CP MS")
+    field(NSAM, "1")
+}
+
+record(calc, "$(P)STALE"){
+    field(DESC, "Check wavelength is updating")
+    field(CALC, "a=b")
+    field(INPA, "$(P)STALE_CHECK:BUFFER:MAX CP MS")
+    field(INPB, "$(P)STALE_CHECK:BUFFER:MIN CP MS")
+    field(HIGH, "1")
+    field(HSV, "2")
+}
