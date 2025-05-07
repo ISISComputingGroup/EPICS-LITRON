@@ -106,7 +106,7 @@ class LitronTests(unittest.TestCase):
         self.ca.assert_that_pv_is("STALE_CHECK:BUFFER", empty_buffer)
         self.ca.assert_that_pv_is("STALE_CHECK:BUFFER:MAX", 0)
         self.ca.assert_that_pv_is("STALE_CHECK:BUFFER:MIN", 0)
-        self.ca.assert_that_pv_is("STALE", 1)
+        self.ca.assert_that_pv_is("STALE", "Stale")
         
         self.ca.set_pv_value("SIM:WL", 1)
         
@@ -117,7 +117,7 @@ class LitronTests(unittest.TestCase):
         self.ca.assert_that_pv_value_causes_func_to_return_true("STALE_CHECK:BUFFER", _check_empty_and_both)
         self.ca.assert_that_pv_is("STALE_CHECK:BUFFER:MAX", 1)
         self.ca.assert_that_pv_is("STALE_CHECK:BUFFER:MIN", -1)
-        self.ca.assert_that_pv_is("STALE", 0)
+        self.ca.assert_that_pv_is("STALE", "Good")
         
     
     @skip_if_recsim("requires backdoor and noise")
@@ -125,14 +125,14 @@ class LitronTests(unittest.TestCase):
         empty_buffer = [0.0] * STALE_TIME
         
         # Buffer not stale when noise is enabled (default) on emulator
-        self.ca.assert_that_pv_is("STALE", 0)
+        self.ca.assert_that_pv_is("STALE", "Good")
         self.ca.assert_that_pv_is_not("STALE_CHECK:BUFFER", [0.0] * STALE_TIME)
         
         # Buffer becomes stale after STALE_TIME has passed seconds after hardware disconnect
         self._lewis.backdoor_set_on_device("hardware_connected", False)
         self.ca.assert_that_pv_is("WL", 0)
         self.ca.assert_that_pv_is("STALE_CHECK:BUFFER", empty_buffer, timeout=25)
-        self.ca.assert_that_pv_is("STALE", 1, timeout=STALE_TIME)
+        self.ca.assert_that_pv_is("STALE", "Stale", timeout=STALE_TIME)
         self.ca.assert_that_pv_alarm_is("STALE", self.ca.Alarms.MAJOR, timeout=STALE_TIME)
 
     # @skip_if_recsim("requires backdoor")

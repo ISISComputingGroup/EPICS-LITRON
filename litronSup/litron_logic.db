@@ -21,11 +21,17 @@ record(compress, "$(P)STALE_CHECK:BUFFER:MIN") {
     field(NSAM, "1")
 }
 
-record(calc, "$(P)STALE"){
+record(calc, "$(P)STALE_CALC"){
     field(DESC, "Check wavelength is updating")
     field(CALC, "a=b")
     field(INPA, "$(P)STALE_CHECK:BUFFER:MAX CP MS")
     field(INPB, "$(P)STALE_CHECK:BUFFER:MIN CP MS")
-    field(HIGH, "1")
-    field(HSV, "2")
+}
+
+record(bi, "$(P)STALE"){
+    field(DESC, "Wavelength Stale")
+    field(ZNAM, "Good")
+    field(ONAM, "Stale")
+    field(INP, "$(P)STALE_CALC CP MS")
+    field(OSV, "2")
 }
