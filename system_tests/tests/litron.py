@@ -16,7 +16,7 @@ IOCS = [
         "macros": {
                     "IPADDR": "127.0.0.1", 
                    "VI_PATH": "C:/instrument/dev/ibex_vis/", 
-                   "BUFFER_SIZE":f"{STALE_TIME}"
+                   "STALE_TIME":f"{STALE_TIME}"
                    },
         "emulator": "Litron",
     },
