@@ -36,4 +36,5 @@ record(bi, "$(P)STALE"){
     field(OSV, "2")
     info(INTEREST, "HIGH")
     info(archive, "VAL")
+    info(alarm, "LITRON")
 }
