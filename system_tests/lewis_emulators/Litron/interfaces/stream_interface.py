@@ -81,7 +81,7 @@ class LitronStreamInterface(StreamInterface):
             case b"OPOCrystalPosition":
                 return format_lvremote_int(self._device.crystal_pos)
             case b"Wavelength":
-                return format_lvremote_float(self._device.wavelength)
+                return format_lvremote_float(self._device.get_wavelength())
             case _:
                 raise ValueError(f"Unknown LVGET parameter: {parameter}")
 

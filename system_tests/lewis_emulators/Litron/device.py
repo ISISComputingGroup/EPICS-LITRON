@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from typing import Callable
+from random import uniform
 
 from lewis.core.statemachine import State
 from lewis.devices import StateMachineDevice
@@ -16,6 +17,8 @@ class SimulatedLitron(StateMachineDevice):
         # Whether the hardware is "connected"
         self.connected = True
 
+        # Whether the hardware and the vi are interacting, for the purpose of stale values
+        self.hardware_connected = True
         # Whether the LVRemote software has been reinitialized
         # by sending *IDN? since the last disconnection
         # (if not, it will not reply)
@@ -30,6 +33,13 @@ class SimulatedLitron(StateMachineDevice):
 
     def nudge_down(self) -> None:
         self.crystal_pos -= self.nudge_dist
+        
+    def get_wavelength(self) -> float:
+        if self.hardware_connected:
+            return self.wavelength + uniform(-0.05, 0.05)
+        else:
+            return self.wavelength
+            
 
     def _get_state_handlers(self) -> dict[str, State]:
         return {
