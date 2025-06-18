@@ -11,6 +11,8 @@ record(compress, "$(P)_STALE_CHECK:BUFFER:MAX") {
     field(ALG, "1")
     field(INP, "$(P)_STALE_CHECK:BUFFER CP MS")
     field(NSAM, "1")
+    field(N, "$(BUFFER_SIZE)")
+    field(PBUF, "YES")
 }
 
 
@@ -19,6 +21,8 @@ record(compress, "$(P)_STALE_CHECK:BUFFER:MIN") {
     field(ALG, "0")
     field(INP, "$(P)_STALE_CHECK:BUFFER CP MS")
     field(NSAM, "1")
+    field(N, "$(BUFFER_SIZE)")
+    field(PBUF, "YES")
 }
 
 record(calc, "$(P)_STALE_CALC"){
